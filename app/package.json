@@ -1,5 +1,5 @@
 {
-  "name": "ezops-test-guilhermegarcia",
+  "name": "ezops-test-nicolas.pereira",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ggarcia00/ezops-test-guilhermegarcia.git"
+    "url": "git+https://github.com/NicolasBR0123/ezops-test-nicolas.pereira"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ggarcia00/ezops-test-guilhermegarcia/issues"
+    "url": "https://github.com/NicolasBR0123/ezops-test-nicolas.pereira"
   },
-  "homepage": "https://github.com/ggarcia00/ezops-test-guilhermegarcia#readme",
+  "homepage": "https://github.com/NicolasBR0123/ezops-test-nicolas.pereira",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
