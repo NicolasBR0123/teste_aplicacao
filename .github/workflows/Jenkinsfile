@@ -1,24 +1,24 @@
-pipeline {
-    agent any
+pipeline{
+     agent any
 
     stages {
         stage ('Build Image') {
            steps {
-     	       script {
-     		   dockerapp = docker.build("web-chat-ezops:nodealpine${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
-               }	
+               script {
+                   dockerapp = docker.build("web-chat-ezops:nodealpine${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
+               }
            }
         }
-     
+
         stage ('Push Image') {
             steps {
                 script {
-     	     	    docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub') {
-     	     	        dockerapp.push('latest')
-     	     		dockerapp.push("${env.BUILD_ID}")
-     	     	    }		
+                    docker.withRegistry('https://login.docker.com/u/login/identifier?state=hKFo2SB4U1VEdVNWQml4d0pCSzdIbEN3emdvWjZ1b1dVX1FYWqFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGlQNDhWQU1ORXlVdDc4LWtJME42R012SDUtRkg4T2lRo2NpZNkgbHZlOUdHbDhKdFNVcm5lUTFFVnVDMGxiakhkaTluYjk', 'dockerhub') {
+                        dockerapp.push('latest')
+                        dockerapp.push("${env.BUILD_ID}")
+                    }
                 }
             }
-        }  	
+        }
     }
 }
