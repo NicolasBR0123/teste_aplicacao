@@ -4,11 +4,11 @@ pipeline {
     stages {
         stage ('Build Image') {
            steps {
-	       script{
+	       script {
 		   dockerapp = docker.build("web-chat-test", '-f ./app/Dockerfile ./app')
 
 	      }	
-              '
+             
            }
       
         }
