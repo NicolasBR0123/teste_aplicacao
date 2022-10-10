@@ -5,7 +5,7 @@ pipeline {
         stage ('Build Image') {
            steps {
 	       script {
-		   dockerapp = docker.build("web-chat-test:nodalpine3.15", '-f ./app/Dockerfile ./app')
+		   dockerapp = docker.build("web-chat-ezops:${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
 
 	      }	
              
