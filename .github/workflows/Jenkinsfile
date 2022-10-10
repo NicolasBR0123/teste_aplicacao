@@ -13,7 +13,7 @@ pipeline{
         stage ('Push Image') {
             steps {
                 script {
-                    docker.withRegistry('https://login.docker.com/u/login/identifier?state=hKFo2SB4U1VEdVNWQml4d0pCSzdIbEN3emdvWjZ1b1dVX1FYWqFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGlQNDhWQU1ORXlVdDc4LWtJME42R012SDUtRkg4T2lRo2NpZNkgbHZlOUdHbDhKdFNVcm5lUTFFVnVDMGxiakhkaTluYjk', 'dockerhub') {
+                    docker.withRegistry('https://login.docker.com/u/login/', 'dockerhub') {
                         dockerapp.push('latest')
                         dockerapp.push("${env.BUILD_ID}")
                     }
