@@ -14,10 +14,9 @@ pipeline{
             steps {
                 script {
                                            
-                        docker login -u 448986393877782883328382439534 {
-                        docker.withRegistry('dckr_pat_mr7k_vWTDqUbjCBUlHD01AbqyM4')
-                        dockerapp.push('latest')
-                        dockerapp.push("${env.BUILD_ID}")
+                     docker.withRegistry('https://login.docker.com/u/login/', 'dockerhub') {
+                     dockerapp.push('latest')
+                     dockerapp.push("${env.BUILD_ID}")
                     }
                 }
             }
