@@ -4,13 +4,21 @@ pipeline {
     stages {
         stage ('Build Image') {
            steps {
-	       script {
-		   dockerapp = docker.build("web-chat-ezops:${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
-
-	      }	
-             
+     	       script {
+     		   dockerapp = docker.build("web-chat-ezops:nodealpine${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
+               }	
            }
-      
         }
-    }  	
+     
+        stage ('Push Image') {
+            steps {
+                script {
+     	     	    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+     	     	        dockerapp.push('latest')
+     	     		dockerapp.push("nodealpine${env.BUILD_ID}")
+     	     	    }		
+                }
+            }
+        }  	
+    }
 }
