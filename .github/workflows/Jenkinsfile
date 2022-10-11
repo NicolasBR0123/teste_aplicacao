@@ -6,18 +6,31 @@ pipeline{
            steps {
                script {
                    dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
-		       stage('Image Successfully'){
+		       stage('Image Successfully') {
 		          echo'Image OK'
 		       }
 	       }
            }
         }
+	    
+	    stage ('Build container'){
+		steps{
+		    script{
+		         sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'
+			    stage('Conatiner Successfully') {
+			       echo'Container OK'
+			    }
+		    }    
+	        }    
+	    }
+	    
 
 	    
         stage ('Push Image') {
             steps {
                 script {
-                     sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'                      
+                     sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'
+			
                      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                          dockerapp.push('latest')
                          dockerapp.push("nodealpine18.10")
