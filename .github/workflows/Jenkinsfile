@@ -5,27 +5,22 @@ pipeline{
         stage ('Build Image') {
            steps {
                script {
-                   dockerapp = docker.build("web-chat-ezops:nodealpine${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
+                   dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
                }
            }
         }
 
+	    
         stage ('Push Image') {
             steps {
                 script {
-                     
-                     withCredentials([[$class: 'UsernamePasswordMultiBinding' , credenciaisId: 'dockerhub' , usernameVariable: '448986393877782883328382439534' , passwordVariable: 'f8@K95KNuVxc' ]]) {
-	sh "docker login --password=${PASSWORD} --username=${USERNAME} ${DOCKER_REGISTRY_URI}"
-}
-                     
-                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') { 
+                     sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'                      
+                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                          dockerapp.push('latest')
-                         dockerapp.push("${env.BUILD_ID}")
-
+                         dockerapp.push("nodealpine18.10")
                     }
                 }
             }
         }
     }
 }
-
