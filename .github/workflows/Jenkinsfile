@@ -3,18 +3,17 @@ pipeline {
 
     
     stages {
-        stage('Commit repository') {
+        stage ('Commit repository') {
             steps {
                 script {
                     sh'git add .'
-		        stage('GitAdd Successfully') {
-		            echo'GitAdd OK'
-		        }
-	        	        sh'git commit -m "commit-app"'
-			            stage('GitCommit Successfully') {
-		                        echo'GitCommit OK'
-		                    }
-		}
+	    	    echo'GitAdd OK'
+	    	    sh'git commit -m teste01'
+                    echo'GitCommit OK'
+                    sh'git push'
+                    sh'nicolaspereira-2000@outlook.com'
+                    sh'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'
+	        }
             }
         }
 	    
