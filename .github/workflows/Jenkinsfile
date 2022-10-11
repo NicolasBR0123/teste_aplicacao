@@ -3,21 +3,25 @@ pipeline {
 
     
     stages {
-        stage ('Commit repository') {
+        stage ('GitAdd') {
             steps {
                 script {
                     sh'git add .'
 	    	        echo'GitAdd OK'
-	   		    steps {
-	                       scipt {
-			           sh'git commit -m teste01'
-				       echo'GitCommit OK'
-		               }	
-	                    }
 	        }
             }
         }
+        
 	    
+	 stage ('GitCommit') {
+            steps {
+                script {
+                    sh'git commit -m "commited"'
+	    	        echo'GitCommit OK'
+			    echo'GitCommit OK '
+	        }
+            }
+        }	    
 
         stage ('Build Image') {
            steps {
