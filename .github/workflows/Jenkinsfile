@@ -13,12 +13,15 @@ pipeline{
         stage ('Push Image') {
             steps {
                 script {
-                                           
-                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                     
+                     withCredentials([[$class: 'UsernamePasswordMultiBinding' , credenciaisId: 'dockerhub' , usernameVariable: '448986393877782883328382439534' , passwordVariable: 'f8@K95KNuVxc' ]]) {
+	sh "docker login --password=${PASSWORD} --username=${USERNAME} ${DOCKER_REGISTRY_URI}"
+}
+                     
+                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') { 
                          dockerapp.push('latest')
-                         docker login -u username --password-stdin
                          dockerapp.push("${env.BUILD_ID}")
-                         docker login -u username --password-stdin
+
                     }
                 }
             }
