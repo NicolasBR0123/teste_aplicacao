@@ -31,7 +31,6 @@ pipeline{
                 script {
 			
                      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                         dockerapp.push('latest')
                          dockerapp.push("nodealpine18.10")
                     }
                 }
