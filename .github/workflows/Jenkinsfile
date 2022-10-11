@@ -6,9 +6,9 @@ pipeline{
            steps {
                script {
                    dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
-		       if dockerapp == 'Successfully':
+		       if dockerapp == 'Successfully'{
 		       	    print('Image OK!) 
-		       
+		       }
                }
            }
         }
