@@ -1,26 +1,49 @@
-pipeline{
+pipeline {
      agent any
+
+    
+    stages {
+        stage ('Commit repository') {
+            steps {
+                script {
+                    sh'git add .'
+		                stage('GitAdd Successfully') {
+		                    echo'GitAdd OK'
+		                }
+                            steps {
+                                script{
+                                    sh'git commit -m teste01'
+                                    sh'git push'
+                                    email = sh'nicolaspereira-2000@outlook.com'
+                                    password = sh'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'
+                                }
+                            }
+	            }
+            }
+        }
 
     stages {
         stage ('Build Image') {
            steps {
                script {
                    dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
-		       stage('Image Successfully') {
-		          echo'Image OK'
-		       }
-	       }
-           }
+		                stage('Image Successfully') {
+		                    echo'Image OK'
+		                }
+	            }
+            }
         }
 	    
+  
+	    
 	    stage ('Build container') {
-		steps{
-		    script{
-		         sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'
-			    stage('Conatiner Successfully') {
-			       echo'Container OK'
-			    }
-		    }    
+		   steps {
+		      script {
+		        sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'
+			        stage('Conatiner Successfully') {
+			            echo'Container OK'
+			        }
+		        }    
 	        }    
 	    }
 	    
@@ -29,9 +52,9 @@ pipeline{
         stage ('Push Image') {
             steps {
                 script {
-                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-			 dockerapp.push('latest')    
-                         dockerapp.push("nodealpine18.10")
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+			            dockerapp.push('latest')    
+                        dockerapp.push("nodealpine18.10")
                     }
                 }
             }
