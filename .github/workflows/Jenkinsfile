@@ -6,8 +6,10 @@ pipeline{
            steps {
                script {
                    dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
-		   echo'Image Successfully'
-               }
+		       stage('Image Successfully'){
+		          echo'Image OK'
+		       }
+	       }
            }
         }
 
