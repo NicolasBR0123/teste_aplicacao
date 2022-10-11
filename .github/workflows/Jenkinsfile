@@ -7,9 +7,13 @@ pipeline {
             steps {
                 script {
                     sh'git add .'
-	    	    echo'GitAdd OK'
-	    	    sh'git commit -m teste01'
-                    echo'GitCommit OK'
+	    	        echo'GitAdd OK'
+	   		    steps {
+	                       scipt {
+			           sh'git commit -m teste01'
+				       echo'GitCommit OK'
+		               }	
+	                    }
 	        }
             }
         }
