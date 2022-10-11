@@ -16,7 +16,9 @@ pipeline{
                                            
                      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                          dockerapp.push('latest')
+                         docker login -u username --password-stdin
                          dockerapp.push("${env.BUILD_ID}")
+                         docker login -u username --password-stdin
                     }
                 }
             }
