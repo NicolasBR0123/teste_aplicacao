@@ -15,26 +15,6 @@ pipeline {
             }
         }
 	    
-          stage ('GitAdd') {
-            steps {
-                script {
-                    sh'git add .'
-	    	        echo'GitAdd OK'
-	        }
-            }
-        }
-        
-	    
-	 stage ('GitCommit') {
-            steps {
-                script {
-                    sh'git commit -m "commited"'
-	    	        echo'GitCommit OK'
-			    echo'GitCommit OK '
-	        }
-            }
-        }	    
-	    
 	    
 	    stage ('Build container') {
 		   steps {
