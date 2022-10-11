@@ -10,9 +10,6 @@ pipeline {
 	    	    echo'GitAdd OK'
 	    	    sh'git commit -m teste01'
                     echo'GitCommit OK'
-                    sh'git push'
-                    sh'nicolaspereira-2000@outlook.com'
-                    sh'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'
 	        }
             }
         }
