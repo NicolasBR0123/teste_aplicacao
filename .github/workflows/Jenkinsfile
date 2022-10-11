@@ -7,22 +7,15 @@ pipeline {
             steps {
                 script {
                     sh'git add .'
-		                stage('GitAdd Successfully') {
-		                    echo'GitAdd OK'
-		                }
-                            steps {
-                                script{
-                                    sh'git commit -m teste01'
-                                    sh'git push'
-                                    email = sh'nicolaspereira-2000@outlook.com'
-                                    password = sh'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'
-                                }
-                            }
-	            }
+		        stage('GitAdd Successfully') {
+		            echo'GitAdd OK'
+		        }
+    
+	        }
             }
         }
 
-    stages {
+
         stage ('Build Image') {
            steps {
                script {
