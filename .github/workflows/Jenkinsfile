@@ -3,7 +3,19 @@ pipeline {
 
     
     stages {
-        stage ('GitAdd') {
+
+        stage ('Build Image') {
+           steps {
+               script {
+                   dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
+		                stage('Image Successfully') {
+		                    echo'Image OK'
+		                }
+	            }
+            }
+        }
+	    
+          stage ('GitAdd') {
             steps {
                 script {
                     sh'git add .'
@@ -22,19 +34,7 @@ pipeline {
 	        }
             }
         }	    
-
-        stage ('Build Image') {
-           steps {
-               script {
-                   dockerapp = docker.build("web-chat-ezops:nodealpine18.10", '-f ./app/Dockerfile ./app')
-		                stage('Image Successfully') {
-		                    echo'Image OK'
-		                }
-	            }
-            }
-        }
 	    
-  
 	    
 	    stage ('Build container') {
 		   steps {
