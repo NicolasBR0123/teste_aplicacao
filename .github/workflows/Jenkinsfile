@@ -1,33 +1,25 @@
-pipeline {
-    agent any
-   tools {
-       maven 'maven'
-       jdk 'Java'
-   }  
-  
-   enviroment {
-       dockerhub=credentials('dockerhub')
-   }
+pipeline{
+     agent any
 
+    stages {
+        stage ('Build Image') {
+           steps {
+               script {
+                   dockerapp = docker.build("web-chat-ezops:nodealpine${env.BUILD_ID}", '-f ./app/Dockerfile ./app')
+               }
+           }
+        }
 
-   stage('build image')
-    {
-        when{
-            brench "main"
+        stage ('Push Image') {
+            steps {
+                script {
+                                           
+                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                         dockerapp.push('latest')
+                         dockerapp.push("${env.BUILD_ID}")
+                    }
+                }
             }
-        steps{
-            sh 'docker build -t web-chat:18.04'
-        }
-    }
-    stage(pushing to dockerhub)
-        when{
-            brench "main"
-        }
-        steps{
-            sh 'docker tag web-chat:18.04 448986393877782883328382439534/web-chat:18.04'
-            sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
-
-            sh 'docker push 448986393877782883328382439534/web-chat:18.04'
-        }
+        }
+    }
 }
-
