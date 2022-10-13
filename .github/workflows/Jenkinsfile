@@ -11,11 +11,11 @@ pipeline {
         stage('Docker Build'){
             steps{
                 script{
-                    dockerapp = docker.build('448986393877782883328382439534/webchat-ezops:${env.BUILD_ID}', '-f ./app/Dockerfile .')
+                    sh 'docker build -t 448986393877782883328382439534/webchat-ezops:nodealpine18.10 ./app'
                 }
             }
         }
-        
+     
         stage('Docker push image'){
             steps{
                 script{
