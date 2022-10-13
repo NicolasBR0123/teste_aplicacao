@@ -13,12 +13,12 @@ pipeline {
      	    }
      	}
           
-     	stage('login') {
-       	    steps{
-      	        sh 'docker login -u 448986393877782883328382439534'
-                   sh 'dckr_pat_KqjNXgc64IHifahCq6LAw40eMj4'
-     	    }
-     	}
+          stage('Push image') {
+	         steps{
+	    	        sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
+	         }	
+	     }    
+
           
     }	     	
 }
