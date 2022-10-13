@@ -9,7 +9,7 @@ pipeline {
     	    
     	stage('Build docker image') {
      	    steps{
-    	        sh 'docker build -t web-chat/nodeapp:$BUILD_NUMBER .'
+    	        sh 'docker build -t web-chat/nodeapp:$BUILD_NUMBER ./app'
 	    }
 	}
     }
