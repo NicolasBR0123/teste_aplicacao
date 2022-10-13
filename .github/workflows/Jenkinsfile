@@ -3,9 +3,19 @@
 
 pipeline {
      agent any
+     tools{
+         maven 'maven_3_5_0'
+     }
 
     
     stages {
+	    
+	stage(Build Maven) {
+	    steps{
+	    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira']]])
+	    sh 'apt install maven'
+	    }
+	}    
 
         stage ('Build docker image') {
            steps {
