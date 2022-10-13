@@ -1,6 +1,9 @@
 pipeline {
     agent any
  
+    environment{
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
     stages {
         stage('Get Source'){
             steps{
@@ -16,12 +19,18 @@ pipeline {
             }
         }
      
+        stage('Login'){
+            steps{
+                script{
+                   sh 'echo $DOCKERHUB_CREDENDIALS_PSW | DOCKER LOGIN -U $DOCKERHUB_CREDENTIALS_USER --password-stdin' 
+                }
+            }
+        }
+        
         stage('Docker push image'){
             steps{
                 script{
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-nicolas')
-                    dockerapp.push('latest')
-                    dockerapp.push("${env.BUILD_ID}")
+                   sh 'docker push 448986393877782883328382439534/webchat-ezops:nodealpine18.10' 
                 }
             }
         }
