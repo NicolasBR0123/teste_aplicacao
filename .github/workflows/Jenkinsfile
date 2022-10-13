@@ -31,7 +31,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker build -t 448986393877782883328382439534/webchat-ezops:nodealpine18.10 ./app'
+                sh 'sh echo $DOCKERHUB_CREDENDIALS_PSW | DOCKER LOGIN -U $DOCKERHUB_CREDENTIALS_USER --password-stdin' 
             }
         }
         
