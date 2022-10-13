@@ -8,7 +8,7 @@ pipeline {
     stages {   
      	stage('Build docker image') {
        	    steps{
-      	        sh 'docker build -t webchat:nodealpine:$BUILD_NUMBER ./app'
+      	        sh 'docker build -t webchat:nodealpine:18.10 ./app'
      	    }
      	}     
     }
