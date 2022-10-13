@@ -20,19 +20,21 @@ pipeline {
         }
        
             
-        stage('Login'){
-            docker {
-                image 'gradle:6.7-jdk11'
-                // Run the container on the node specified at the
-                // top-level of the Pipeline, in the same workspace,
-                // rather than on a new node entirely:
-                reuseNode true
-                      script{
-                          sh 'echo $DOCKERHUB_CREDENDIALS_PSW | DOCKER LOGIN -U $DOCKERHUB_CREDENTIALS_USER --password-stdin' 
-                      }
-                     
-            }
-        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'gradle:6.7-jdk11'
+                    // Run the container on the node specified at the
+                    // top-level of the Pipeline, in the same workspace,
+                    // rather than on a new node entirely:
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'docker build -t 448986393877782883328382439534/webchat-ezops:nodealpine18.10 ./app'
+            }
+        }
+        
         
         stage('Docker push image'){
             steps{
