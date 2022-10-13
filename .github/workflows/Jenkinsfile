@@ -1,20 +1,21 @@
 pipeline {
     agent any
  
-    stages{
+    stages {
         stage {
             steps('Get Source'){
                 git url: 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira', branch: 'main'
             }
         }
+        
         stage('Docker Build'){
             steps{
                 script{
-                    dockerapp = docker.build('448986393877782883328382439534/webchat-ezops:${env.BUILD_ID}',
-                    '-f ./app/Dockerfile .')
+                    dockerapp = docker.build('448986393877782883328382439534/webchat-ezops:${env.BUILD_ID}', '-f ./app/Dockerfile .')
                 }
             }
         }
+        
         stage('Docker push image'){
             steps{
                 script{
