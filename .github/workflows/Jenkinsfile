@@ -9,7 +9,7 @@ pipeline {
     	    
     	stage('Build docker image') {
      	    steps{
-    	        sh 'docker build -t web-chat/nodeapp:$BUILD_NUMBER cd home/nicolas/github/repositories/ezops-test-nicolas.pereira/app/ .'
+    	        sh 'docker build -t web-chat/nodeapp:$BUILD_NUMBER /home/nicolas/github/repositories/ezops-test-nicolas.pereira/app/ .'
 	    }
 	}
     }
