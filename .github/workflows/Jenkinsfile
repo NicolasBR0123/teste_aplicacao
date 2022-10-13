@@ -1,13 +1,10 @@
 
-
-
 pipeline {
      agent any
      environment {
      DOCKERHUB_CREDENTIALS = credentials('docker-hub-nicolas')
      }
 
-    
     stages {
     	    
     	stage('Build docker image'){
@@ -30,8 +27,8 @@ pipeline {
     }
     post{
         always{
-	    sh'docker logout'
+	    sh 'docker logout'
 	}
     }	
         	
-}   
+}
