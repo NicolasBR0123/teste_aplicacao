@@ -9,13 +9,15 @@ pipeline {
     	    
      	stage('Build docker image') {
        	    steps{
-      	        sh 'docker build -t web-chat/nodeapp:$BUILD_NUMBER ./app'
+      	        sh 'docker build -t webchat:nodealpine:$BUILD_NUMBER ./app'
      	    }
      	}
           
         stage('Push image') {
 	    steps{
-	        sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
+	        sh 'docker image tag $BUILD_NUMBER 448986393877782883328382439534/webchatwebchat:nodealpine18.10'
+		sh 'docker image rm webchat docker image push 448986393877782883328382439534/webchat:nodealpine$BUILD_NUMBER' 
+		sh 'docker image push 448986393877782883328382439534/webchat:nodealpine:$BUILD_NUMBER'    
 	    }	
 	 }      
     } 	     	
