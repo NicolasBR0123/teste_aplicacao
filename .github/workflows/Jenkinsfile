@@ -9,11 +9,6 @@ pipeline {
 
     
     stages {
-    	stage('SCM Checkout'){
-     	    steps{
-    	    git 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira' 
-    	    }
-    	}
     	    
     	stage('Build docker image'){
      	    steps{
