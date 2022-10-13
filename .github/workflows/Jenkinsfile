@@ -2,8 +2,8 @@ pipeline {
     agent any
  
     stages {
-        stage {
-            steps('Get Source'){
+        stage('Get Source'){
+            steps{
                 git url: 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira', branch: 'main'
             }
         }
