@@ -10,7 +10,7 @@ pipeline {
         stage ('Build docker image') {
            steps {
                script {
-                   dockerapp = docker.build("web-chat-ezops:nodealpine18.10.0", '-f ./app/Dockerfile ./app')
+                   dockerapp = docker.build("web-chat:alpine3.15", '-f ./app/Dockerfile ./app')
 		                stage('Image Successfully') {
 		                    echo'Image OK'
 		                }
@@ -25,7 +25,8 @@ pipeline {
                     withCredentials([string(credentialsId: '448986393877782883328382439534', variable: 'dockerhubpwd')]) {
                     sh'docker login -u 448986393877782883328382439534 -p ${f8@K95KNuVxc}'
                     }
-                    sh'docker push 448986393877782883328382439534/web-chat-ezops'
+                    sh'docker push 448986393877782883328382439534/web-chat'
+			echo'Push OK'
 	            }   
             }
         }
