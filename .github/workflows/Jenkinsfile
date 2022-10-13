@@ -15,9 +15,7 @@ pipeline {
           
         stage('Push image') {
 	    steps{
-	        sh 'docker image tag $BUILD_NUMBER 448986393877782883328382439534/webchatwebchat:nodealpine18.10'
-		sh 'docker image rm webchat docker image push 448986393877782883328382439534/webchat:nodealpine$BUILD_NUMBER' 
-		sh 'docker image push 448986393877782883328382439534/webchat:nodealpine:$BUILD_NUMBER'    
+	        echo'olá'
 	    }	
 	 }      
     } 	     	
