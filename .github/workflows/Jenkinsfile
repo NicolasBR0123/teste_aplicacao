@@ -23,7 +23,7 @@ pipeline {
            steps {
                 script {
                     withCredentials([string(credentialsId: '448986393877782883328382439534', variable: 'dockerhubpwd')]) {
-                    sh'docker login -u 448986393877782883328382439534 -p ${f8@K95KNuVxc}'
+                    sh"docker login -u 448986393877782883328382439534 -p ${f8@K95KNuVxc}"
                     }
                     sh'docker push 448986393877782883328382439534/web-chat'
 			echo'Push OK'
