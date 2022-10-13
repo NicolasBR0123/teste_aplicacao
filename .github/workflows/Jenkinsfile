@@ -7,28 +7,27 @@ pipeline {
 
     stages {
     	    
-    	stage('Build docker image'){
+    	stage('Build docker image') {
      	    steps{
     	        sh 'cd home/nicolas/github/repositories/ezops-test-nicolas.pereira/app/'
 		sh 'docker build -t web-chat/nodeapp:$BUILD_NUMBER .'
     	}
     	     
-     	stage('Login to dockerhub'){
+     	stage('Login to dockerhub') {
      	    steps{
      	        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
      	    }
      	}   
     	
-	stage('Push image'){
+	stage('Push image') {
 	    steps{
 	    	sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
 	    }	
 	}    
-    }
-    post{
-        always{
+}    
+post {
+        always {
 	    sh 'docker logout'
 	}
-    }	
-        	
+    }	     	
 }
