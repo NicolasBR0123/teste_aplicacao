@@ -27,7 +27,7 @@ pipeline {
      	    }
      	}   
     	
-	stage(Push image){
+	stage('Push image'){
 	    steps{
 	    	sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
 	    }	
