@@ -8,7 +8,7 @@ pipeline {
     stages {   
      	stage('Build docker image') {
        	    steps{
-                   docker{
+                   scipt{
                     sh 'docker build webchat:nodealpine18.0 -t ./app'
                    }
      	    }
