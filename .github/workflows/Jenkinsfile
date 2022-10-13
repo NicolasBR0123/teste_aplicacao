@@ -22,19 +22,19 @@ pipeline {
         stage ('Push image to hub') {
            steps {
                 script {
-                    withCredentials([string(credentialsId: '448986393877782883328382439534', variable: 'dockerhubpwd')]) {
-                    sh"docker login -u 448986393877782883328382439534 -p ${f8@K95KNuVxc}"
+                    withCredentials([string(credentialsId: ' 448986393877782883328382439534', variable: 'dockerhubpwd')]) {
+                    sh"docker login -u 448986393877782883328382439534 -p ${dockerhubpwd}"
                     }
                     sh'docker push 448986393877782883328382439534/web-chat'
 			echo'Push OK'
 	            }   
             }
         }
-
+dockerhubpwd
 
 	    stage ('Run container') {
 		   steps {
-		      script {
+		      script {dockerhubpwd
 		        sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'
 			        stage('Conatiner Successfully') {
 			            echo'Container OK'
