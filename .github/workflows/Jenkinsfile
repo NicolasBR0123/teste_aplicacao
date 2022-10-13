@@ -10,12 +10,6 @@ pipeline {
        	    steps{
       	        sh 'docker build -t webchat:nodealpine:$BUILD_NUMBER ./app'
      	    }
-     	}
-          
-        stage('Push image') {
-	    script{
-	        sh'apt update'
-	    }	
-	}      
+     	}     
     }
 }	
