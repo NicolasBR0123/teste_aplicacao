@@ -18,20 +18,14 @@ pipeline {
                 }
             }
         }
-       
-            
-        stage('Build') {
-            agent {
-                docker {
-                    image 'gradle:6.7-jdk11'
-                    reuseNode true
+     
+        stage('Login'){
+            steps{
+                script{
+                   sh 'docker login '
                 }
             }
-            steps {
-                sh 'sh echo $DOCKERHUB_CREDENDIALS_PSW | DOCKER LOGIN -U $DOCKERHUB_CREDENTIALS_USER --password-stdin' 
-            }
-        }
-        
+        }
         
         stage('Docker push image'){
             steps{
@@ -42,3 +36,4 @@ pipeline {
         }
     }   
 }
+
