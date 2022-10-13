@@ -8,7 +8,9 @@ pipeline {
     stages {   
      	stage('Build docker image') {
        	    steps{
-      	        dockerapp = docker.build ("webchat:nodealpine:18.10"  '-t ./app')
+                   docker{
+                    dockerapp = docker.build ("webchat:nodealpine:18.10"  '-t ./app')
+                   }
      	    }
      	}     
     }
