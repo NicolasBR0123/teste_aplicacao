@@ -27,11 +27,10 @@ pipeline {
                 // top-level of the Pipeline, in the same workspace,
                 // rather than on a new node entirely:
                 reuseNode true
-                    steps{
-                        script{
+                      script{
                           sh 'echo $DOCKERHUB_CREDENDIALS_PSW | DOCKER LOGIN -U $DOCKERHUB_CREDENTIALS_USER --password-stdin' 
-                        }
-                     }
+                      }
+                     
             }
         }
         
