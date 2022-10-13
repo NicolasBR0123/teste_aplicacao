@@ -13,12 +13,10 @@ pipeline {
      	    }
      	}
           
-          stage('Push image') {
-	         steps{
-	    	        sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
-	         }	
-	     }    
-
-          
-    }	     	
+        stage('Push image') {
+	    steps{
+	        sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
+	    }	
+	 }      
+    } 	     	
 }
