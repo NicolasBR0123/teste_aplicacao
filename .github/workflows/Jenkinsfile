@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage {
             stage('Get Source'){
-                git url: https: '//github.com/NicolasBR0123/ezops-test-nicolas.pereira', branch: 'main'
+                git url: 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira', branch: 'main'
             }
         }
         stage('Docker Build'){
