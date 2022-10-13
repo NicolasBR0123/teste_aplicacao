@@ -5,8 +5,7 @@ pipeline {
      DOCKERHUB_CREDENTIALS = credentials('docker-hub-nicolas')
      }
 
-    stages {
-    	    
+    stages {   
      	stage('Build docker image') {
        	    steps{
       	        sh 'docker build -t webchat:nodealpine:$BUILD_NUMBER ./app'
@@ -15,8 +14,8 @@ pipeline {
           
         stage('Push image') {
 	    script{
-	        echo'olá'
+	        sh'apt update'
 	    }	
-	 }      
+	}      
     }
 }	
