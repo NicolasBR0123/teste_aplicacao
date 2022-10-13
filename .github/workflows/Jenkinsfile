@@ -3,54 +3,40 @@
 
 pipeline {
      agent any
-     tools{
-         maven 'maven_3_5_0'
+     environment {
+     DOCKERHUB_CREDENTIALS = credentials('docker-hub-nicolas')
      }
 
     
     stages {
-	    
-	stage(Build Maven) {
+    	stage('SCM Checkout'){
+     	    steps{
+    	    git 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira' 
+    	    }
+    	}
+    	    
+    	stage('Build docker image'){
+     	    steps{
+    	    git 'docker build -t web-chat/nodeapp:$BUILD_NUMBER .'
+    	    }
+    	}
+    	     
+     	stage('Login to dockerhub'){
+     	    steps{
+     	        sh'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+     	    }
+     	}   
+    	
+	stage(){
 	    steps{
-	    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NicolasBR0123/ezops-test-nicolas.pereira']]])
-	    sh 'apt install maven'
-	    }
+	    	sh 'docker push web-chat/nodeapp:$BUILD_NUMBER'
+	    }	
 	}    
-
-        stage ('Build docker image') {
-           steps {
-               script {
-                   dockerapp = docker.build("web-chat:alpine3.15", '-f ./app/Dockerfile ./app')
-		                stage('Image Successfully') {
-		                    echo'Image OK'
-		                }
-	            }
-            }
-        }
-	    
-	    
-        stage ('Push image to hub') {
-           steps {
-                script {
-                    withCredentials([string(credentialsId: ' 448986393877782883328382439534', variable: 'dockerhubpwd')]) {
-                    sh"docker login -u 448986393877782883328382439534 -p ${dockerhubpwd}"
-                    }
-                    sh'docker push 448986393877782883328382439534/web-chat'
-			echo'Push OK'
-	            }   
-            }
-        }
-dockerhubpwd
-
-	    stage ('Run container') {
-		   steps {
-		      script {dockerhubpwd
-		        sh'docker run -d -p 8000:8000 web-chat-ezops:nodealpine18.10'
-			        stage('Conatiner Successfully') {
-			            echo'Container OK'
-			        }
-		        }    
-	        }    
-	    }
     }
-}
+    post{
+        always{
+	    sh'docker logout'
+	}
+    }	
+        	
+}   
