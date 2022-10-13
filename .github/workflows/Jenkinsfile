@@ -14,9 +14,9 @@ pipeline {
      	}
           
         stage('Push image') {
-	    steps{
+	    script{
 	        echo'olá'
 	    }	
 	 }      
-    } 	     	
-}
+    }
+}	
